@@ -4,7 +4,7 @@ import os
 
 dictfile = open("../dictionary.txt", 'r')
 dict = []
-line = dictfile.readline()
+line = dictfile.readline()[:-1]
 words = line.split(',')
 for word in words:
 	dict.append(word)
