@@ -1,32 +1,32 @@
 import os
 
 # Constants
-my_path = "C:/Users/burcu/Desktop/Data"
+my_path = "D:\CS 464 - Data\Data"
 ID_prefix = "ID:"
 title_prefix = "Title:"
 genre_prefix = "Genres:"
 
 ACTION = 1
-ADVENTURE = 2 
-FANTASY = 3 
-SCIFI = 4 
-WESTERN = 5
-ANIMATION = 6
-FAMILY = 7
-BIOGRAPHY = 8
-DOCUMENTARY = 9 
-SPORT = 10
-HISTORY = 11 
-WAR = 12
-COMEDY = 13
-CRIME = 14
+ADVENTURE = 2
+ANIMATION = 3
+BIOGRAPHY = 4
+COMEDY = 5
+CRIME = 6
+DOCUMENTARY = 7
+DRAMA = 8
+FAMILY = 9
+FANTASY = 10
+HISTORY = 11
+HORROR = 12
+MUSIC = 13
+MUSICAL = 14
 MYSTERY = 15
-ROMANCE = 16 
-DRAMA = 17
-HORROR = 18 
+ROMANCE = 16
+SCIFI = 17
+SPORT = 18
 THRILLER = 19
-MUSIC = 20 
-MUSICAL = 21
+WAR = 20
+WESTERN = 21
 
 list_dir = os.listdir(my_path)
 output_file = open("../truth.txt", "w")
@@ -37,11 +37,11 @@ for dir in list_dir:
         file_name = "%s\%s\info.txt" % (my_path, dir)  # File to read
         entry_line = ""  # Entry string for output file
         for line in open(file_name):
-            if line[:3] == ID_prefix:
-                entry_line += line[3:-1] + " "
+            # if line[:3] == ID_prefix:
+                # entry_line += line[3:-1] + " "
             # elif line[:6] == title_prefix:
             #     entry_line += line[6:-1] + ','
-            elif line[:7] == genre_prefix:
+            if line[:7] == genre_prefix:
                 genres = line[7:].split() # Convert genre to ID
                 genreIDs = set()
                 for genre in genres:
@@ -94,3 +94,4 @@ for dir in list_dir:
         output_file.write(entry_line + '\n')
     except IOError:
         print("Wrong file or file path: " + dir)
+output_file.close()

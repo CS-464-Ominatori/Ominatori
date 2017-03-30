@@ -1,9 +1,0 @@
-1 action adventure fantasy sci-fi western
-2 animation family
-3 biography documentary sport
-4 history war
-5 comedy
-6 crime mystery
-7 romance drama
-8 horror thriller
-9 music musical

@@ -2,7 +2,7 @@
 DATAPATH = 'D:\CS 464 - Data\Data'; % TODO change this according to your machine
 directory = dir(DATAPATH);
 idxOfSubdirectories = [directory(:).isdir];
-movieNames = {directory(isub).name}';
+movieNames = {directory(idxOfSubdirectories).name}';
 movieNames(ismember(movieNames,{'.','..'})) = []; % Remove parent folder paths
 
 %% Iterate over all poster images and use the getImageFeatures() function
@@ -16,9 +16,4 @@ for idx = 1:size(movieNames)
 end
 
 %% Export matrix to space-delimited file
-dlmwrite('color_features.txt', allFeatures,' ');
-
-% NOTE: the file in the repository contains a first column of IDs of the
-% movies, which was added manually from the other scripts. I didn't write
-% Matlab code for it since we already have all the ID "mining" scripts in
-% Python. 
+dlmwrite('color_features.txt', allFeatures,' '); 
