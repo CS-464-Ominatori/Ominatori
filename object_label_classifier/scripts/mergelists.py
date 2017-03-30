@@ -18,8 +18,8 @@ f2[5] = "4500-5354.txt"
 
 path = "C:/Users/burcu/Desktop/labels/"
 
-wName = open("../../labels-with-names.txt", "w")
-wF = open("../../labels.txt", "w")
+wName = open("../labels_with_names.txt", "w")
+wF = open("../labels.txt", "w")
 
 for i in range(0,6):
 	file = open(path + f[i],"r")

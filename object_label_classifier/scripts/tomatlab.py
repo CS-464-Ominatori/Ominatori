@@ -1,36 +1,22 @@
-#creates the input and output for matlab
+#transforms tables into matlab friendly format, enter your own filenames
+#to use like this run buildtables first
 import os
 
-dictfile = open("../../dictionary.txt", 'r')
-dict = []
-line = dictfile.readline()
-words = line.split(',')
-for word in words:
-	dict.append(word)
-dictfile.close()
+temp_input = open("./temp_bow_inputs.txt", 'r')
+temp_output = open("../../shared/truth_with_genreIDs.txt", 'r')
+input = open("../bow_inputs.txt", 'w')
+output = open("../bow_outputs.txt", 'w')
 
-labels = open("../../labels.txt", 'r')
-truth = open("../../truth.txt", 'r')
-input = open("../../bow_inputs.txt", 'w')
-output = open("../../bow_outputs.txt", 'w')
-for line in labels:
-	words = line.split(',')
-	for word in dict:
-		if (word in words):
-			input.write("1 ")
-		else:
-			input.write("0 ")
-	input.write('\n')
-	tr = truth.readline().split(' ')
-	for i in range(1, len(tr)):
-		output.write(tr[i].rstrip() + " ")
-	output.write('\n')
+for line in temp_output:
+	input_line = temp_input.readline()
+	words = line.rstrip().split(' ')
+	for word in words:
+		input.write(input_line)
+		output.write(word + '\n')
 	
-labels.close()
-truth.close()
+temp_input.close()
+temp_output.close()
 input.close()
 output.close()
 
 print("done")
-	
-	

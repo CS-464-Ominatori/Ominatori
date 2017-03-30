@@ -4,11 +4,11 @@
 #check if truth and index are ordered the same
 import os
 
-labelsWithNames = open("../../labels-with-names.txt", "r")
-index = open("../../index.txt", "r")
-labels = open("../../labels.txt", "r") 
-dictionary = open("../../dictionary.txt", "r")
-truth = open("../../truth.txt", 'r')
+labelsWithNames = open("../labels_with_names.txt", "r")
+index = open("../../shared/index.txt", "r")
+labels = open("../labels.txt", "r") 
+dictionary = open("../dictionary.txt", "r")
+truth = open("../../shared/truth_with_movieID_and_genreIDs.txt", 'r')
 
 dict = []
 dictWords = dictionary.readline().split(',')
@@ -39,10 +39,10 @@ index.close()
 labels.close()
 truth.close()
 
-numlines = sum(1 for line in open('../../labels-with-names.txt')) 
+numlines = sum(1 for line in open('../labels_with_names.txt')) 
 print("no of lines in labels: " + str(numlines))
-numlines = sum(1 for line in open('../../index.txt'))
+numlines = sum(1 for line in open('../../shared/index.txt'))
 print("no of lines in index: " + str(numlines))
-numlines = sum(1 for line in open('../../labels.txt'))
+numlines = sum(1 for line in open('../labels.txt'))
 print("no of lines in labels-with-names: " + str(numlines))		
 print("note: no of lines doesn't include the final empty line")	

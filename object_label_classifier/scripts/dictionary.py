@@ -3,7 +3,7 @@ import os
 
 dict = set()
 
-file = open("../../labels.txt", "r")
+file = open("../labels.txt", "r")
 
 for line in file:
 	words = line.split(',')
@@ -12,7 +12,7 @@ for line in file:
 		
 file.close()
 
-dictionary = open("../../dictionary.txt", "w")
+dictionary = open("../dictionary.txt", "w")
 
 for word in dict:
 	dictionary.write(word + ',')
