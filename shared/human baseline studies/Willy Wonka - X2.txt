@@ -1,0 +1,50 @@
+1 adventure, musical, family, comedy
+2 romance, comedy,adventure
+3 romance, comedy
+4 sport, comedy, family
+5 war, drama, 
+6 thriller, crime, fantasy, horror
+7 animation, family
+8 drama, mystery
+9 drama, mystery
+10 fantasy, romance
+11 comedy, family
+12 comedy, fantasy
+13 crime, horror
+14 adventure, fantasy
+15 mystery, crime
+16 crime
+17 fantasy, family, comedy
+18 animation, family, fantasy
+19 horror, fantasy, mystery
+20 western
+21 fantasy
+22 drama, biography
+23 musical
+24 documentary
+25 animation, adventure, fantasy
+26 comedy
+27 documentary
+28 action, war, science ficton
+29 family, comedy
+30 horror, mystery
+31 fantasy, action, history
+32 family, fantasy, animation
+33 war, drama
+34 drama
+35 fantasy
+36 horror, mystery, thrller
+37 horror, mystery
+38 horror, mystery
+39 horror, mystery
+40 horror, mystery, thriller
+41 horror,mystery, thriler
+42 biography, western
+43 fantasy, horror
+44 fantasy, sci-fi
+45 fantasy, sci-fi, adventure, action
+46 fantay, sci-fi, war, action
+47 sci-fi, fantasy
+48 fantasy, action
+49 war, fantasy, sci-fi, action
+50 fantasy, sci-fi, action
