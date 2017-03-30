@@ -1,23 +1,33 @@
 import os
 
 # Constants
-my_path = "D:\CS 464 - Data\Data"
+my_path = "C:/Users/burcu/Desktop/Data"
 ID_prefix = "ID:"
 title_prefix = "Title:"
 genre_prefix = "Genres:"
 
-ACTION = ADVENTURE = FANTASY = SCIFI = WESTERN = 1
-ANIMATION = FAMILY = 2
-BIOGRAPHY = DOCUMENTARY = SPORT = 3
-HISTORY = WAR = 4
-COMEDY = 5
-CRIME = MYSTERY = 6
-ROMANCE = DRAMA = 7
-HORROR = THRILLER = 8
-MUSIC = MUSICAL = 9
+ACTION = 1
+ADVENTURE = 2 
+FANTASY = 3 
+SCIFI = 4 
+WESTERN = 5
+ANIMATION = 6
+FAMILY = 7
+BIOGRAPHY = 8
+DOCUMENTARY = 9 
+SPORT = 10
+HISTORY = 11 
+WAR = 12
+COMEDY = 13
+CRIME = 14
+MYSTERY = 15
+ROMANCE = 16 
+DRAMA = 17
+HORROR = 18 
+THRILLER = 19
+MUSIC = 20 
+MUSICAL = 21
 
-
-os.chdir(my_path)
 list_dir = os.listdir(my_path)
 output_file = open("../truth.txt", "w")
 
