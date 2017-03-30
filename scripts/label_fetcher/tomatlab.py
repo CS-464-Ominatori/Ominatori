@@ -11,8 +11,8 @@ dictfile.close()
 
 labels = open("../../labels.txt", 'r')
 truth = open("../../truth.txt", 'r')
-input = open("../../bog_inputs.txt", 'w')
-output = open("../../bog_outputs.txt", 'w')
+input = open("../../bow_inputs.txt", 'w')
+output = open("../../bow_outputs.txt", 'w')
 for line in labels:
 	words = line.split(',')
 	for word in dict:
