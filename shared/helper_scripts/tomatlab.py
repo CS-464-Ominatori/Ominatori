@@ -2,8 +2,8 @@
 #to use like this run buildtables first
 import os
 
-temp_input = open("./temp_bow_inputs.txt", 'r')
-temp_output = open("../../shared/truth_with_genreIDs.txt", 'r')
+temp_input = open("./color_features.txt", 'r')
+temp_output = open("./truth_with_genreIDs.txt", 'r')
 input = open("../bow_inputs.txt", 'w')
 output = open("../bow_outputs.txt", 'w')
 
@@ -13,7 +13,7 @@ for line in temp_output:
 	for word in words:
 		input.write(input_line)
 		output.write(word + '\n')
-	
+
 temp_input.close()
 temp_output.close()
 input.close()
