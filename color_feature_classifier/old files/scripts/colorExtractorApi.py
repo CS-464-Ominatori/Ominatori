@@ -1,5 +1,5 @@
 
-iimport os
+import os
 import json
 import colorgram
 
