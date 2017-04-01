@@ -1,37 +1,28 @@
-
 import os
 import json
 import colorgram
 
-path = "/Users/berceste/Desktop/Data"
+path = "/../../Users/berceste/Desktop/Data2"
 listdir = os.listdir(path)
-lowerlimit = max(0, int(sys.argv[1]));
-upperlimit = min(len(listdir),int(sys.argv[2]));
-print("labeling between " + str(lowerlimit) + " and " + str(upperlimit) + " of " + str(len(listdir)) + '\n')
-file = open("/Users/berceste/Desktop/colors/" + str(lowerlimit) + "-"+str(upperlimit)+".txt","w")
-fileWithNames = open("/Users/berceste/Desktop/colors/" + str(lowerlimit) + "-"+str(upperlimit)+"-names.txt","w") 
-batchsize = 128;
+print("extracting fundamental 6 colors from all images " + '\n')
+file = open("/Users/berceste/Desktop/colors/colorsFromAPI2.txt","w")fileWithNames = open("/Users/berceste/Desktop/colors/colorsFromAPINames2.txt","w")
 
-for i in range(lowerlimit, upperlimit, batchsize):
-	print("starting: " + str(i));
-	k = min(batchsize, upperlimit - i); 
-	names = [None]*(k)
-	urls = [None]*(k)
-	for j in range(0, k):	
-		dir = listdir[i + j];
-		names[j] = dir;
-		colors = colorgram.extract(dir + "/w342.jpg", 6)
-		print(colors)
-		
-		fileWithNames.write(names[j] + ',')
-		listOfColors = str.split("<")
-		for l in range(0, len(listOfColors)):
-			start = l.index('(');
-			end = l.index(')');
-			color = l[start + 1, end] 
-			file.write(color + ',')
-			fileWithNames.write(color + ',')
-		file.write('\n');
-		fileWithNames.write('\n')
-	
+for i in range(0, len(listdir)):
+        print("starting: " + str(i))
+        names = [None]*(len(listdir))
+        dir = listdir[i]
+        names[i] = dir
+        colors = colorgram.extract("/Users/berceste/Desktop/Data2/" + dir + "/w342.jpg", 6)
+        #print(colors)
+
+        fileWithNames.write(names[i] + ',')
+
+        for l in range(0, len(colors)):
+                rgb = colors[l].rgb
+                file.write(str(rgb[0]) + " " + str(rgb[1]) + " " + str(rgb[2]) + " ")
+                fileWithNames.write(str(rgb[0]) + " " + str(rgb[1]) + " " + str(rgb[2]) + " ")
+        file.write('\n')
+        fileWithNames.write('\n')
+
 file.close()
+fileWithNames.close()
