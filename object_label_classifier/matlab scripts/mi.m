@@ -1,4 +1,4 @@
-function [ranks] = mi
+function mi
 
 X = importdata("../train_features.txt");
 Y = importdata("../train_labels.txt");
@@ -24,5 +24,14 @@ for c=1:no_of_classes
     end
 end
 mi(isnan(mi)) = 0;
-[~,ranks] = sort(mi, 2, 'descend');
+[probs,ranks] = sort(mi, 2, 'descend');
+
+D = importdata("../dictionary.txt");
+D = strsplit(D{1}, ',');
+G = importdata("../../shared/genres.txt");
+for g=1:length(G)
+    fprintf("%s\n", G{g});
+    for i=1:10
+        fprintf("%s %f\n", D{ranks(g, i)}, probs(g,i));
+    end
 end
