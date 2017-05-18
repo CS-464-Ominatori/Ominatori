@@ -1,4 +1,5 @@
-function displayPerformance (test_features, test_labels, class_names, probabilities)
+function displayPerformance (test_labels, class_names, probabilities)
+    fprintf("3 predictions\n");
     [~, ranks] = sort(probabilities, 2, 'descend');
     ranks = ranks(:, 1:3);
 
@@ -10,7 +11,7 @@ function displayPerformance (test_features, test_labels, class_names, probabilit
     true_label = 0; % number of movies where at least one genre was correctly predicted
     total_movies = 0;
 
-    for test_id = 1:size(test_features, 1)
+    for test_id = 1:size(test_labels, 1)
         classes = find(test_labels(test_id, :) == 1);
         predicted_classes = class_names(:, ranks(test_id, :));
         success = false;
@@ -32,11 +33,10 @@ function displayPerformance (test_features, test_labels, class_names, probabilit
         end
         total_movies = total_movies + 1;
     end
-
-    disp(true_positives);
-    disp(total_labels);
-    disp(false_positives);
-    disp(total_predicted_labels);
-    disp(true_label);
-    disp(total_movies);
+    fprintf("True positives, %d, ", true_positives);
+    fprintf("Total labels, %d, ", total_labels);
+    fprintf("False positives, %d, ",false_positives);
+    fprintf("Total predicted labels, %d\n",total_predicted_labels);
+    fprintf("At least one genre true with, %d, ",true_label);
+    fprintf("Total movies, %d\n\n\n", total_movies);
 end
