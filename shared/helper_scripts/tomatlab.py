@@ -38,7 +38,7 @@ for i in range(0, test_datapoints):
 	words = line.rstrip().split(' ')
 	genres = [0]*genre_count
 	for word in words:
-		genres[int(word.rstrip()) - 1] = 1;
+		genres[int(word.rstrip()) - 1] = 1
 	binary_line = ' '.join(str(e) for e in genres)
 	test_features.write(input_line)
 	test_labels.write(binary_line + '\n')	
