@@ -21,15 +21,13 @@ for i=1:length(cutoffs)
     Y = importdata("./train_labels_cutoff_"+coff+".txt");
     Mdl = fitcnb(X,Y,'Distribution','mn', 'Crossval', 'on');
     losses(i) = kfoldLoss(Mdl);
-    fprintf(file1,"%d,", i);
+    fprintf(file1,"%f,", coff);
     fprintf(file2,"%f,", losses(i));
     if(losses(i) < min_loss)
         min_loss = losses(i);
         min_coff = coff;
     end
 end
-file1.close();
-file2.close();
 fprintf("\nminumum loss at %f\n", min_coff);
 figure;
 plot(losses);

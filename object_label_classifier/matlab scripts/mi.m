@@ -5,7 +5,7 @@ Y = importdata("../train_labels.txt");
 
 no_of_classes = max(Y);
 no_of_features = size(X,2);
-[probs, ranks] = calculate_mi(no_of_classes, no_of_features, X, Y);
+[probs, ranks] = calculate_mi(no_of_classes, no_of_features, no_of_train_data, X, Y);
 G = save_to_csv(ranks,probs);
 
 thresholds = [0 150 450 750 1050 1200 1350 1500 1550];
@@ -30,7 +30,7 @@ end
 
 end
 
-function [probs, ranks] = calculate_mi(no_of_classes, no_of_features, X, Y)
+function [probs, ranks] = calculate_mi(no_of_classes, no_of_features, no_of_train_data, X, Y)
 mi = zeros(no_of_classes, no_of_features);
 
 N = no_of_train_data;
@@ -63,5 +63,4 @@ for g=1:length(G)
     end
     fprintf(file, "\n");
 end
-file.close();
 end
