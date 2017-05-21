@@ -1,7 +1,7 @@
 import os
 
 # Constants
-my_path = "/mnt/d/CS-464-Data/Data"
+my_path = "C:/Users/burcu/Desktop/Data"
 ID_prefix = "ID:"
 title_prefix = "Title:"
 genre_prefix = "Genres:"

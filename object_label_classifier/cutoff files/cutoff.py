@@ -15,13 +15,16 @@ dictfile.close()
 
 labels = open("../train_object_labels.txt", 'r')
 input = open("./temp_train_object_labels_cutoff_" + cutoff + ".txt", 'w')
+num = 0
+zero = 0
+
 for line in labels:
 	all_words = line.split(',')
 	words = []
 	for x in range(0, len(all_words), 2):
 		if(float(all_words[x + 1])>cutoffF):
 			words.append(all_words[x])
-			
+	
 	for word in dict:
 		if (word in words):
 			input.write("1 ")
@@ -31,6 +34,8 @@ for line in labels:
 	
 labels.close()
 input.close()
+
+print("%d,%d", num, zero)
 
 labels = open("../test_object_labels.txt", 'r')
 input = open("./temp_test_object_labels_cutoff_" + cutoff + ".txt", 'w')
@@ -47,7 +52,7 @@ input.close()
 
 print("building temp files done")
 	
-genre_count = 19
+genre_count = 9
 
 train_datapoints = sum(1 for line in open("../../shared/train_truth_with_genreIDs.txt", 'r'))
 temp_train_input = open("./temp_train_object_labels_cutoff_" + cutoff + ".txt", 'r')

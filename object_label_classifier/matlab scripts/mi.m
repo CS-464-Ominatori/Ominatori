@@ -53,7 +53,7 @@ end
 
 
 function G=save_to_csv(ranks, probs)
-file = open("mutual_info.csv", "w");
+file = fopen("mutual_info.csv");
 D = importdata("../dictionary.txt");
 D = strsplit(D{1}, ',');
 G = importdata("../../shared/genres.txt");
@@ -63,4 +63,5 @@ for g=1:length(G)
     end
     fprintf(file, "\n");
 end
+file.close();
 end

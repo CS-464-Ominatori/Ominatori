@@ -10,6 +10,6 @@ function probabilities = test()
     displayPerformanceSingleLabel(test_labels, labels);
     for i=1:10
         probs_copy = probabilities;
-        displayPerformanceWithCutoff(test_labels, class_names, probs_copy, i/19);
+        displayPerformanceWithCutoff(test_labels, class_names, probs_copy, i/9);
     end
 end
