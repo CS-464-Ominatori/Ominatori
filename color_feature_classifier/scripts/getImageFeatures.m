@@ -1,37 +1,31 @@
 function imgFeatures = getImageFeatures(imageName)
     
     img = imread(imageName);
+    
+    % Resize
+    SCALE_FACTOR = 0.1;
+    img = imresize(img, SCALE_FACTOR);
 
-    avgR = mean(mean(img(:, :, 1)));
+    r = reshape(img(:, :, 1).',1,[]);
     if(size(img, 3) > 1)
-        avgG = mean(mean(img(:, :, 2)));
-        avgB = mean(mean(img(:, :, 3)));
-        
-        hsvImg = rgb2hsv(img);
-
-        avgH = mean(mean(hsvImg(:, :, 1)));
-        avgS = mean(mean(hsvImg(:, :, 2)));
-        avgV = mean(mean(hsvImg(:, :, 3)));
+        g = reshape(img(:, :, 2).',1,[]);
+        b = reshape(img(:, :, 3).',1,[]);
         
         labImg = rgb2lab(img); 
 
-        avgL = mean(mean(labImg(:, :, 1)));
-        avgA = mean(mean(labImg(:, :, 2)));
-        avgLaB = mean(mean(labImg(:, :, 3)));
+        l = reshape(labImg(:, :, 1).',1,[]);
+        a = reshape(labImg(:, :, 2).',1,[]);
+        lab_b = reshape(labImg(:, :, 3).',1,[]);
         
         grayImg = rgb2gray(img);
         
     else 
-        avgG = 0;
-        avgB = 0;
+        g = 0;
+        b = 0;
         
-        avgH = 0;
-        avgS = 0;
-        avgV = 0;
-        
-        avgL = 0;
-        avgA = 0;
-        avgLaB = 0;
+        l = 0;
+        a = 0;
+        lab_b = 0;
         
         grayImg = img;
     end
@@ -40,7 +34,10 @@ function imgFeatures = getImageFeatures(imageName)
 
     grayMtx = graycomatrix(grayImg);
     f = graycoprops(grayMtx, {'Contrast', 'Homogeneity', 'Correlation', 'Energy'} );
+    
+    % Get histogram of gradients
+    hog = extractHOGFeatures(img);
 
-    imgFeatures = [ avgR, avgG, avgB, avgH, avgS, avgV, avgL, avgA, avgLaB, entr, f.Contrast, f.Homogeneity, f.Correlation, f.Energy ];
+    imgFeatures = [ r, g, b, l, a, lab_b, entr, f.Contrast, f.Homogeneity, f.Correlation, f.Energy, hog ];
 end
 

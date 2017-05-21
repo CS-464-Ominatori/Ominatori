@@ -1,30 +1,30 @@
 import os
 
 # Constants
-my_path = "C:/Users/burcu/Desktop/Data"
+my_path = "/mnt/d/CS-464-Data/Data"
 ID_prefix = "ID:"
 title_prefix = "Title:"
 genre_prefix = "Genres:"
 
 ACTION = 1
-ADVENTURE = 2
-ANIMATION = 3
-COMEDY = 4
-CRIME = 5
-DOCUMENTARY = 6
+ADVENTURE = 1
+ANIMATION = 2
+COMEDY = 5
+CRIME = 6
+DOCUMENTARY = 3
 DRAMA = 7
-FAMILY = 8
-FANTASY = 9
-HISTORY = 10
-HORROR = 11
-MUSIC = 12
-MYSTERY = 13
-ROMANCE = 14
-SCIFI = 15
-TVMOVIE = 16
-THRILLER = 17
-WAR = 18
-WESTERN = 19
+FAMILY = 2
+FANTASY = 1
+HISTORY = 4
+HORROR = 8
+MUSIC = 9
+MYSTERY = 6
+ROMANCE = 7
+SCIFI = 1
+TVMOVIE = 7
+THRILLER = 8
+WAR = 4
+WESTERN = 1
 
 train_listdir = os.listdir(my_path + '/_train/')
 train_output_file = open("../train_truth_with_genreIDs.txt", "w")
@@ -32,7 +32,7 @@ train_output_file = open("../train_truth_with_genreIDs.txt", "w")
 # Get all the info.txt files for every  train movie
 for dir in train_listdir:
     try:
-        file_name = "%s\_train\%s\info.txt" % (my_path, dir)  # File to read
+        file_name = "%s/_train/%s/info.txt" % (my_path, dir)  # File to read
         entry_line = ""  # Entry string for output file
         for line in open(file_name):
             # if line[:3] == ID_prefix:
@@ -52,7 +52,7 @@ for dir in train_listdir:
                         genreIDs.add(ANIMATION)
                     elif genre == "comedy":
                         genreIDs.add(COMEDY)
-                    elif genre == "crime": 
+                    elif genre == "crime":
                         genreIDs.add(CRIME)
                     elif genre == "documentary":
                         genreIDs.add(DOCUMENTARY)
@@ -93,7 +93,7 @@ test_output_file = open("../test_truth_with_genreIDs.txt", "w")
 # Get all the info.txt files for every test movie
 for dir in test_listdir:
     try:
-        file_name = "%s\_test\%s\info.txt" % (my_path, dir)  # File to read
+        file_name = "%s/_test/%s/info.txt" % (my_path, dir)  # File to read
         entry_line = ""  # Entry string for output file
         for line in open(file_name):
             # if line[:3] == ID_prefix:
@@ -113,7 +113,7 @@ for dir in test_listdir:
                         genreIDs.add(ANIMATION)
                     elif genre == "comedy":
                         genreIDs.add(COMEDY)
-                    elif genre == "crime": 
+                    elif genre == "crime":
                         genreIDs.add(CRIME)
                     elif genre == "documentary":
                         genreIDs.add(DOCUMENTARY)
