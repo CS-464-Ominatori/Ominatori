@@ -1,4 +1,4 @@
-function displayPerformanceWithCutoff (test_labels, class_names, probabilities, cutoff)
+function [TP, FP]=displayPerformanceWithCutoff (test_labels, class_names, probabilities, cutoff)
     fprintf("Cutoff %f prediction\n", cutoff);
     [sorted, ranks] = sort(probabilities, 2, 'descend');
 
@@ -38,4 +38,6 @@ function displayPerformanceWithCutoff (test_labels, class_names, probabilities, 
     fprintf("Total predicted labels, %d\n",total_predicted_labels);
     fprintf("At least one genre true with, %d, ",true_label);
     fprintf("Total movies, %d\n\n", total_movies);
+    TP = true_positives/total_predicted_labels;
+    FP = false_positives/total_predicted_labels;
 end
