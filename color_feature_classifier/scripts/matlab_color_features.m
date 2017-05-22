@@ -7,7 +7,7 @@ function matlab_color_features(DATAPATH, outfile_name)
 
     %% Iterate over all poster images and use the getImageFeatures() function
     PATH_TEMPLATE = '%s\\%s\\w342.jpg';
-    FEATURE_VECTOR_LENGTH = 14;
+    FEATURE_VECTOR_LENGTH = 7678;
     allFeatures = zeros(size(movieNames, 1), FEATURE_VECTOR_LENGTH);
     for idx = 1:size(movieNames)
         moviePath = sprintf(PATH_TEMPLATE, DATAPATH, movieNames{idx});
