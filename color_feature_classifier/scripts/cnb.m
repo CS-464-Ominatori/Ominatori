@@ -1,4 +1,4 @@
-function predictions = cnb(TRAIN_TRUTH_PATH, TRAIN_FEATURES_PATH, TEST_TRUTH_PATH, TEST_FEATURES_PATH)
+function [predictions, probabilities] = cnb(TRAIN_TRUTH_PATH, TRAIN_FEATURES_PATH, TEST_TRUTH_PATH, TEST_FEATURES_PATH)
     %% Perform kNN
     X = importdata(TRAIN_FEATURES_PATH);
     Y = importdata(TRAIN_TRUTH_PATH);
