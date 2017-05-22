@@ -13,5 +13,5 @@ function predictions = kNN(TRAIN_TRUTH_PATH, TRAIN_FEATURES_PATH, TEST_TRUTH_PAT
     Ynew = importdata(TEST_TRUTH_PATH);
     
     addpath('..\..\shared\helper_scripts');
-    displayPerformance(Xnew, Ynew, Mdl.ClassNames', probabilities);
+    displayPerformance(Ynew, Mdl.ClassNames', probabilities);
 end
