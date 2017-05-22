@@ -1,12 +1,12 @@
 function displayPerformanceWithCutoff(test_labels, class_names, probabilities, cutoffs)
-cutoff_results = zeros(2, length(cutoffs));
-no_of_predictions = zeros(1, length(cutoffs));
+cutoff_results = zeros(4, length(cutoffs));
 for i=1:length(cutoffs)
     probs_copy = probabilities;
-    [Metric1, Metric2, Metric3] = displayPerformanceWithCutoffFor(test_labels, class_names, probs_copy, cutoffs(i));
+    [Metric1, Metric2, Metric3, Metric4] = displayPerformanceWithCutoffFor(test_labels, class_names, probs_copy, cutoffs(i));
     cutoff_results(1, i) = Metric1;
     cutoff_results(2, i) = Metric2;
-    no_of_predictions(i) = Metric3;
+    cutoff_results(3, i) = Metric3;
+    cutoff_results(4, i) = Metric4;
 end
 figure;
 xlabel("Thresholds for Predictions");
@@ -17,12 +17,19 @@ legend({'Correctly Associated Movies', 'False Positives'});
 hold off;
 figure;
 xlabel("Thresholds for Predictions");
+hold on;
+plot(cutoffs, cutoff_results(4,:));
+plot(cutoffs, cutoff_results(2,:));
+legend({'True Positives', 'False Positives'});
+hold off;
+figure;
+plot(cutoffs, cutoff_results(3, :));
+xlabel("Thresholds for Predictions");
 ylabel("Number of Predictions");
-plot(cutoffs, no_of_predictions);
 end
 
 
-function [Metric1, Metric2, Metric3]=displayPerformanceWithCutoffFor(test_labels, class_names, probabilities, cutoff)
+function [Metric1, Metric2, Metric3, Metric4]=displayPerformanceWithCutoffFor(test_labels, class_names, probabilities, cutoff)
     fprintf("Cutoff %f prediction\n", cutoff);
     [sorted, ranks] = sort(probabilities, 2, 'descend');
 
@@ -66,4 +73,5 @@ function [Metric1, Metric2, Metric3]=displayPerformanceWithCutoffFor(test_labels
     Metric1 = true_label/total_movies;
     Metric2 = false_positives/total_predicted_labels;
     Metric3 = total_predicted_labels;
+    Metric4 = true_positives/total_predicted_labels;
 end
