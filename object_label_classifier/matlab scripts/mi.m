@@ -5,29 +5,28 @@ Y = importdata("../train_labels.txt");
 
 no_of_classes = max(Y);
 no_of_features = size(X,2);
-[probs, ranks] = calculate_mi(no_of_classes, no_of_features, no_of_train_data, X, Y);
+[probs, ranks] = calculate_mi(no_of_classes, no_of_features, size(X,1), X, Y);
 G = save_to_csv(ranks,probs);
 
-thresholds = [0 150 450 750 1050 1200 1350 1500 1550];
+thresholds = [0 10^-7 10^-6 10^-5 10^-4 5*10^-4 10^-3 2*10^-3 4*10^-3 6*10^-3 8*10^-3 10^-2];
 losses = zeros(no_of_classes, length(thresholds));
+fid = fopen('mi_results.csv', 'wt');
 for g=1:no_of_classes
-    Temp_X1 = X(:, ranks(g, :));
-    filename = strcat('mi_results_for_genre_',num2str(g),'.txt');
-    fid = fopen( filename, 'wt');
     for i=1:length(thresholds)
-        Temp_X = Temp_X1(:, 1:(end - thresholds(i)));
+        Temp_X = X(:, probs(g, :) > thresholds(i));
         Mdl = fitcnb(Temp_X,Y,'Distribution','mn', 'Crossval', 'on');
         losses(g, i) = kfoldLoss(Mdl);
         fprintf("%f, ", losses(g,i));
-        fprintf(fid, "%f\n", losses(g,i));
+        fprintf(fid, "%f,", losses(g,i));
     end
     fprintf('\n');
-    figure;
-    plot(thresholds, losses(g,:));
-    t = sprintf('Losses for %s' , G{g});
-    title(t);
+    fprintf(fid, '\n');
 end
-
+figure;
+plot(thresholds, losses);
+legend(G);
+xlabel("MI Thresholds");
+ylabel("Cross Validation Losses");
 end
 
 function [probs, ranks] = calculate_mi(no_of_classes, no_of_features, no_of_train_data, X, Y)
@@ -53,7 +52,7 @@ end
 
 
 function G=save_to_csv(ranks, probs)
-file = fopen("mutual_info.csv");
+file = fopen("mutual_info.csv", 'w');
 D = importdata("../dictionary.txt");
 D = strsplit(D{1}, ',');
 G = importdata("../../shared/genres.txt");
