@@ -1,4 +1,22 @@
-function [TP, FP]=displayPerformanceWithCutoff (test_labels, class_names, probabilities, cutoff)
+function displayPerformanceWithCutoff(test_labels, class_names, probabilities, cutoffs)
+cutoff_results = zeros(2, length(cutoffs));
+for i=1:length(cutoffs)
+    probs_copy = probabilities;
+    [Metric1, Metric2] = displayPerformanceWithCutoffFor(test_labels, class_names, probs_copy, cutoffs(i));
+    cutoff_results(1, i) = Metric1;
+    cutoff_results(2, i) = Metric2;
+end
+figure;
+xlabel("Thresholds for Predictions");
+hold on;
+plot(cutoffs, cutoff_results(1,:));
+plot(cutoffs, cutoff_results(2,:));
+legend({'Correctly Associated Movies', 'False Positives'});
+hold off;
+end
+
+
+function [Metric1, Metric2]=displayPerformanceWithCutoffFor(test_labels, class_names, probabilities, cutoff)
     fprintf("Cutoff %f prediction\n", cutoff);
     [sorted, ranks] = sort(probabilities, 2, 'descend');
 
@@ -38,6 +56,6 @@ function [TP, FP]=displayPerformanceWithCutoff (test_labels, class_names, probab
     fprintf("Total predicted labels, %d\n",total_predicted_labels);
     fprintf("At least one genre true with, %d, ",true_label);
     fprintf("Total movies, %d\n\n", total_movies);
-    TP = true_positives/total_predicted_labels;
-    FP = false_positives/total_predicted_labels;
+    Metric1 = true_label/total_labels;
+    Metric2 = false_positives/total_predicted_labels;
 end

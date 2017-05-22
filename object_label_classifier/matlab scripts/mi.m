@@ -8,7 +8,7 @@ no_of_features = size(X,2);
 [probs, ranks] = calculate_mi(no_of_classes, no_of_features, size(X,1), X, Y);
 G = save_to_csv(ranks,probs);
 
-thresholds = [0 10^-7 10^-6 10^-5 10^-4 5*10^-4 10^-3 2*10^-3 4*10^-3 6*10^-3 8*10^-3 10^-2];
+thresholds = [0 2*10^-8 4*10^-8 6*10^-8 8*10^-8 10^-7 2*10^-7 4*10^-7 6*10^-7 8*10^-7 10^-6 2*10^-6 4*10^-6 6*10^-6 8*10^-6 10^-5 2*10^-5 4*10^-5 6*10^-5 8*10^-5 10^-4 5*10^-4  2*10^-4 4*10^-4 6*10^-4 8*10^-4 10^-3 2*10^-3 4*10^-3 6*10^-3 8*10^-3 10^-2];
 losses = zeros(no_of_classes, length(thresholds));
 fid = fopen('mi_results.csv', 'wt');
 for g=1:no_of_classes
