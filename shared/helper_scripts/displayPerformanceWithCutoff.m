@@ -13,7 +13,7 @@ xlabel("Thresholds for Predictions");
 hold on;
 plot(cutoffs, cutoff_results(1,:));
 plot(cutoffs, cutoff_results(2,:));
-legend({'True Positives', 'False Positives'});
+legend({'Correctly Associated Movies', 'False Positives'});
 hold off;
 figure;
 xlabel("Thresholds for Predictions");
