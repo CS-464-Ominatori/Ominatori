@@ -11,7 +11,7 @@ xlabel("Thresholds for Predictions");
 hold on;
 plot(cutoffs, cutoff_results(1,:));
 plot(cutoffs, cutoff_results(2,:));
-legend({'Correctly Associated Movies', 'False Positives'});
+legend({'True Positives', 'False Positives'});
 hold off;
 end
 
@@ -56,6 +56,6 @@ function [Metric1, Metric2]=displayPerformanceWithCutoffFor(test_labels, class_n
     fprintf("Total predicted labels, %d\n",total_predicted_labels);
     fprintf("At least one genre true with, %d, ",true_label);
     fprintf("Total movies, %d\n\n", total_movies);
-    Metric1 = true_label/total_labels;
+    Metric1 = true_positives/total_predicted_labels;
     Metric2 = false_positives/total_predicted_labels;
 end

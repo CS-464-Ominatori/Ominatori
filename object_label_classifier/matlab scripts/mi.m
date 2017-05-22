@@ -5,7 +5,7 @@ Y = importdata("../train_labels.txt");
 
 no_of_classes = max(Y);
 no_of_features = size(X,2);
-[probs, ranks] = calculate_mi(no_of_classes, no_of_features, size(X,1), X, Y);
+[probs, ranks, mi] = calculate_mi(no_of_classes, no_of_features, size(X,1), X, Y);
 G = save_to_csv(ranks,probs);
 
 thresholds = [0 2*10^-8 4*10^-8 6*10^-8 8*10^-8 10^-7 2*10^-7 4*10^-7 6*10^-7 8*10^-7 10^-6 2*10^-6 4*10^-6 6*10^-6 8*10^-6 10^-5 2*10^-5 4*10^-5 6*10^-5 8*10^-5 10^-4 5*10^-4  2*10^-4 4*10^-4 6*10^-4 8*10^-4 10^-3 2*10^-3 4*10^-3 6*10^-3 8*10^-3 10^-2];
@@ -13,7 +13,7 @@ losses = zeros(no_of_classes, length(thresholds));
 fid = fopen('mi_results.csv', 'wt');
 for g=1:no_of_classes
     for i=1:length(thresholds)
-        Temp_X = X(:, probs(g, :) > thresholds(i));
+        Temp_X = X(:, mi(g, :) > thresholds(i));
         Mdl = fitcnb(Temp_X,Y,'Distribution','mn', 'Crossval', 'on');
         losses(g, i) = kfoldLoss(Mdl);
         fprintf("%f, ", losses(g,i));
@@ -23,13 +23,13 @@ for g=1:no_of_classes
     fprintf(fid, '\n');
 end
 figure;
-plot(thresholds, losses);
+plot(1:length(thresholds), losses);
 legend(G);
 xlabel("MI Thresholds");
 ylabel("Cross Validation Losses");
 end
 
-function [probs, ranks] = calculate_mi(no_of_classes, no_of_features, no_of_train_data, X, Y)
+function [probs, ranks, return_mi] = calculate_mi(no_of_classes, no_of_features, no_of_train_data, X, Y)
 mi = zeros(no_of_classes, no_of_features);
 
 N = no_of_train_data;
@@ -47,6 +47,7 @@ for c=1:no_of_classes
     end
 end
 mi(isnan(mi)) = 0;
+return_mi = mi;
 [probs,ranks] = sort(mi, 2, 'descend');
 end
 
