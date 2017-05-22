@@ -16,9 +16,9 @@ plot(cutoffs, cutoff_results(2,:));
 legend({'Correctly Associated Movies', 'False Positives'});
 hold off;
 figure;
+plot(cutoffs, no_of_predictions);
 xlabel("Thresholds for Predictions");
 ylabel("Number of Predictions");
-plot(cutoffs, no_of_predictions);
 end
 
 
