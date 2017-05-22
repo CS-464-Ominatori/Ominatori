@@ -30,7 +30,8 @@ function [Metric1, Metric2]=displayPerformanceWithCutoffFor(test_labels, class_n
 
     for test_id = 1:size(test_labels, 1)
         classes = find(test_labels(test_id, :) == 1);
-        predicted_classes = class_names(:, ranks(test_id, sorted(test_id,:) > cutoff));
+        indices =  probabilities(test_id,:) > cutoff;
+        predicted_classes = class_names(:, indices);
         success = false;
         for i = 1:size(classes, 2)
             if(ismember(classes(i), predicted_classes))
